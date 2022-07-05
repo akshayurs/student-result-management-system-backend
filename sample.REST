@@ -1,0 +1,29 @@
+GET http://localhost:5000
+
+###
+POST http://localhost:5000/signin
+Content-Type: application/json
+
+{
+    "password":"password", 
+    "username":"newausera1"
+}
+
+
+###
+GET http://localhost:5000/myDetails
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzQ2ZGQ1YTViZjU0OTNhZWE5MmQ2YiIsImlhdCI6MTY1NzA0MDUzMiwiZXhwIjoxNjU4MzM2NTMyfQ.sCEGnLPnV09w3wCWRJ3fV0he1R6WJe-ceFIgXjkrEEQ"
+
+
+# sample requests to api endpoints
+###
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+    "username":"newausera1",
+    "name":"im checking email user",
+    "password":"password",
+    "userType":"admin",
+    "email":"fvlkxqudlnxce@gmail.com"
+}
