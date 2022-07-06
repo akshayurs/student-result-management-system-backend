@@ -1,29 +1,78 @@
 GET http://localhost:5000
 
-###
+
+### admin
+POST http://localhost:5000/signin
+Content-Type: application/json
+
+{
+    "password":"securepassword", 
+    "username":"admin"
+}
+
+### student
 POST http://localhost:5000/signin
 Content-Type: application/json
 
 {
     "password":"password", 
-    "username":"newausera1"
+    "username":"01JST20CS001"
+}
+
+### teacher
+POST http://localhost:5000/signin
+Content-Type: application/json
+
+{
+    "password":"password", 
+    "username":"01emp001"
 }
 
 
 ###
 GET http://localhost:5000/myDetails
-authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzQ2ZGQ1YTViZjU0OTNhZWE5MmQ2YiIsImlhdCI6MTY1NzA0MDUzMiwiZXhwIjoxNjU4MzM2NTMyfQ.sCEGnLPnV09w3wCWRJ3fV0he1R6WJe-ceFIgXjkrEEQ"
-
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
 
 # sample requests to api endpoints
 ###
 POST http://localhost:5000/signup
 Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
 
 {
-    "username":"newausera1",
-    "name":"im checking email user",
-    "password":"password",
+    "username":"admin",
+    "name":"Admin 1",
+    "password":"securepassword",
     "userType":"admin",
-    "email":"fvlkxqudlnxce@gmail.com"
+    "email":"admin@gmail.com"
 }
+
+
+###
+POST http://localhost:5000/updateresult
+Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
+
+{
+    "usn":"01JST20CS001",
+    "sem":1,
+    "result":[{"code":"20CS110","subject":"computer science","credit":4,"grade":"A"},{"code":"20EC110","subject":"Electronics","credit":3,"grade":"S"}]
+}
+
+
+###
+GET http://localhost:5000/viewresultbyusn?usn=01JST20CS001&sem=1
+Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
+
+###
+GET http://localhost:5000/viewmyresult?sem=1
+Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzViMWViNTdlNjQ1YjExYzgyNzc5MiIsInVzZXJUeXBlIjoic3R1ZGVudCIsInVzZXJuYW1lIjoiMDFKU1QyMENTMDAxIiwiaWF0IjoxNjU3MTIzMzY3LCJleHAiOjE2NTg0MTkzNjd9.pqBjNXnBihbNGoyS7rk3yynifo3F4uyTY6dn_4FCTlI"
+
+###
+GET http://localhost:5000/publishresult?sem=1
+Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
+
+

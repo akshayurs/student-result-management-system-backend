@@ -7,10 +7,11 @@ const {
   passwordResetTemplate,
 } = require('../Helpers/email')
 
-function sendUserToken(res, id, userType) {
-  const token = jwt.sign({ id, userType }, process.env.JWT_SECRET, {
+function sendUserToken(res, obj) {
+  const token = jwt.sign({ ...obj }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXP,
   })
+
   res
     .status(200)
     .cookie('token', token, {
@@ -38,14 +39,18 @@ exports.signin = async (req, res) => {
   try {
     const user = await User.findOne({
       $or: [{ username }, { email: username }],
-    }).select({ password: 1, verified: 1 })
+    }).select({ password: 1, username: 1, userType: 1 })
     if (!user || !user.validatePassword(password)) {
       res
         .status(401)
         .send({ success: false, status: 401, message: 'Invalid credentials' })
       return
     }
-    return sendUserToken(res, user['_id'], user['userType'])
+    return sendUserToken(res, {
+      id: user['_id'],
+      userType: user['userType'],
+      username: user['username'],
+    })
   } catch (err) {
     res.status(500).send({ success: false, status: 500, message: err.message })
   }
@@ -56,6 +61,7 @@ exports.signin = async (req, res) => {
 //  req.body = {
 //   name,
 //   username,
+//   usn,
 //   email,
 //   password
 // }
@@ -63,6 +69,7 @@ exports.signin = async (req, res) => {
 // returns -> {success: Boolean, message, token }
 exports.signup = async (req, res) => {
   try {
+    if (req.userType != 'admin') throw new Error('not authorized')
     await User.create({
       ...req.body,
     })

@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     minLength: 3,
     maxLength: 30,
-    lowercase: true,
+    uppercase: true,
     required: [true, 'Username is required'],
     unique: true,
     match: /^[a-zA-Z0-9_\-]*$/,

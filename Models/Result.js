@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
 const ResultSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+  usn: {
+    type: String,
+    required: [true, 'usn number is required'],
+    minLength: 5,
+    maxLength: 15,
   },
   published: {
     type: Boolean,
+    default: false,
   },
   sem: {
     type: Number,

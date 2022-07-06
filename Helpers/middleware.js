@@ -17,8 +17,11 @@ exports.isAuthorized = (req, res, next) => {
         .status(401)
         .send({ success: false, status: 401, message: 'Not Authorized' })
     }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
     req.userId = decoded.id
+    req.username = decoded.username?.toUpperCase()
     req.userType = decoded.userType
   } catch (e) {
     return res
