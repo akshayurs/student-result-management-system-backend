@@ -9,15 +9,15 @@ exports.isAuthorized = (req, res, next) => {
       req.headers.authorization.startsWith('Bearer')
     ) {
       token = req.headers.authorization.split(' ')[1]
-    } else if (req.cookies.token) {
-      token = req.cookies.token
+    }
+    if (req.cookies.token) {
+      token = req.cookies.token.trim()
     }
     if (token == null || token == '') {
       return res
         .status(401)
         .send({ success: false, status: 401, message: 'Not Authorized' })
     }
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     req.userId = decoded.id

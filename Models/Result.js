@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 const ResultSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Name is required'],
+    trim: true,
+    maxLength: 30,
+    minLength: 3,
+  },
   usn: {
     type: String,
     required: [true, 'usn number is required'],
@@ -15,6 +22,12 @@ const ResultSchema = new mongoose.Schema({
     required: true,
     min: 1,
     max: 8,
+  },
+  year: {
+    type: String,
+    required: true,
+    minLength: 4,
+    maxLength: 10,
   },
   result: {
     required: true,

@@ -13,6 +13,7 @@ const {
   resetPassword,
   checkToken,
   myDetails,
+  removeUser,
 } = require('./Controllers/auth')
 
 const {
@@ -21,6 +22,7 @@ const {
   viewMyResult,
   publishResult,
 } = require('./Controllers/result')
+const { listUsers } = require('./Controllers/other')
 
 router.get('/', (req, res) => {
   res
@@ -30,6 +32,7 @@ router.get('/', (req, res) => {
 
 router.post('/signin', signin)
 router.post('/signup', isAuthorized, signup)
+router.post('/removeuser', isAuthorized, removeUser)
 router.get('/signout', signout)
 router.get('/userexists/:username', userExists)
 router.post('/changepassword', isAuthorized, changePassword)
@@ -43,5 +46,7 @@ router.post('/updateresult', isAuthorized, updateResult)
 router.get('/viewresultbyusn', isAuthorized, viewResultByUSN)
 router.get('/viewmyresult', isAuthorized, viewMyResult)
 router.get('/publishresult', isAuthorized, publishResult)
+
+router.get('/listusers', isAuthorized, listUsers)
 
 module.exports = router

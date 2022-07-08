@@ -6,12 +6,13 @@ const mongodb = require('mongodb')
 // req.body = {
 //  usn,
 //  sem,
+//  year,
 //  result: [{code,subject,credit,grade}]
 // }
 //
 // returns -> {success:Boolean,message}
 exports.updateResult = async (req, res) => {
-  const { usn, sem, result } = req.body
+  const { usn, sem, result, year } = req.body
   try {
     if (req.userType == 'student') throw new Error('Not authorized')
     const user = await User.findOne({ username: usn })
@@ -23,7 +24,7 @@ exports.updateResult = async (req, res) => {
     }
     await Result.findOneAndUpdate(
       { usn },
-      { usn, sem: parseInt(sem), result },
+      { usn, sem: parseInt(sem), result, year, name: user.name },
       { upsert: true }
     )
     res
@@ -37,7 +38,7 @@ exports.updateResult = async (req, res) => {
 // route to view result
 // req.query = {
 //   usn,
-//   sem
+//   sem,
 // }
 exports.viewResultByUSN = async (req, res) => {
   try {
@@ -48,7 +49,6 @@ exports.viewResultByUSN = async (req, res) => {
       sem: parseInt(sem),
       published: true,
     })
-    console.log(result)
     if (!result) {
       return res
         .status(404)
@@ -72,11 +72,6 @@ exports.viewMyResult = async (req, res) => {
       sem: parseInt(sem),
       published: true,
     })
-    console.log({
-      usn: req.username,
-      sem,
-    })
-    console.log(result)
     if (!result) {
       return res
         .status(404)
@@ -90,16 +85,17 @@ exports.viewMyResult = async (req, res) => {
 
 // route to publish result for admin
 // req.query = {
-// sem
+// sem,year
 // pause: true (optional)
 // }
 exports.publishResult = async (req, res) => {
   try {
     if (req.userType != 'admin') throw new Error('Not authorized')
-    const { sem, pause } = req.query
+    const { sem, year, pause } = req.query
     const result = await Result.updateMany(
       {
         sem: parseInt(sem),
+        year,
       },
       {
         published: pause ? false : true,

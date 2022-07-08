@@ -31,7 +31,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/myDetails
-authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzViMjBjNTdlNjQ1YjExYzgyNzc5NCIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6IkFETUlOIiwiaWF0IjoxNjU3MjA5MDY1LCJleHAiOjE2NTg1MDUwNjV9.oSjDJELKLkVOPtAdBSCfHK5r08Ox797zEkr6te2j_vY"
 
 # sample requests to api endpoints
 ###
@@ -75,4 +75,12 @@ GET http://localhost:5000/publishresult?sem=1
 Content-Type: application/json
 authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
 
+###
+POST http://localhost:5000/removeuser
+Content-Type: application/json
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhMThlM2Q1YjJlNmEzMGFjNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU3MTIxMjQyLCJleHAiOjE2NTg0MTcyNDJ9.vnFBe7QnMD_qVuGY6eb3qF82WGmYtLlyQ8dEbSQdU0w"
+
+{
+    "username":"admin"
+}
 

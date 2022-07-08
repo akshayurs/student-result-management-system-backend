@@ -23,7 +23,13 @@ function sendUserToken(res, obj) {
       secure: true,
       httpOnly: true,
     })
-    .send({ success: true, status: 200, token })
+    .send({
+      success: true,
+      status: 200,
+      token,
+      username: obj.username,
+      userType: obj.userType,
+    })
 }
 
 // route to sign in user and sending token
@@ -39,7 +45,7 @@ exports.signin = async (req, res) => {
   try {
     const user = await User.findOne({
       $or: [{ username }, { email: username }],
-    }).select({ password: 1, username: 1, userType: 1 })
+    }).select({ password: 1, username: 1, userType: 1, name: 1 })
     if (!user || !user.validatePassword(password)) {
       res
         .status(401)
@@ -50,6 +56,7 @@ exports.signin = async (req, res) => {
       id: user['_id'],
       userType: user['userType'],
       username: user['username'],
+      name: user['name'],
     })
   } catch (err) {
     res.status(500).send({ success: false, status: 500, message: err.message })
@@ -79,9 +86,34 @@ exports.signup = async (req, res) => {
       message: 'Account created successfully',
     })
   } catch (err) {
-    if (err.code == 11000) {
-      err.message = 'user already registered, Please sign in to continue'
-    }
+    // if (err.code == 11000) {
+    //   err.message = 'user already registered, Please sign in to continue'
+    // }
+    res.status(500).send({ success: false, status: 500, message: err.message })
+  }
+}
+
+// route to remove user from database
+//
+//  req.body = {
+//   username,
+// }
+//
+// returns -> {success: Boolean, message,status }
+exports.removeUser = async (req, res) => {
+  try {
+    if (req.userType != 'admin') throw new Error('not authorized')
+    const user = await User.deleteOne({
+      username: req.username,
+    })
+    if (user.deletedCount)
+      res.status(200).send({
+        success: true,
+        status: 200,
+        message: 'Account deleted successfully',
+      })
+    else throw new Error("User doesn't exist")
+  } catch (err) {
     res.status(500).send({ success: false, status: 500, message: err.message })
   }
 }
@@ -268,5 +300,10 @@ exports.myDetails = async (req, res) => {
 //route to check login
 // return -> {succuss, status, message}
 exports.checkToken = (req, res) => {
-  res.status(200).send({ success: true, status: 200, message: 'token valid' })
+  res.status(200).send({
+    success: true,
+    status: 200,
+    message: 'token valid',
+    userType: req.userType,
+  })
 }
