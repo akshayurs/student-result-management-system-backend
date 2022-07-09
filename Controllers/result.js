@@ -101,6 +101,7 @@ exports.publishResult = async (req, res) => {
         published: pause ? false : true,
       }
     )
+    console.log(result)
     if (!result) {
       return res
         .status(404)

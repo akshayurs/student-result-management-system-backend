@@ -83,4 +83,6 @@ authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzVhNzVhM
 {
     "username":"admin"
 }
-
+###
+GET http://localhost:5000/listusers?type=admin
+authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzg1Zjg3OWQ2MDExNjliNWQ4NGMzNyIsInVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNjU3Mjk5OTA4LCJleHAiOjE2NTg1OTU5MDh9.c7H4NVne_ep9BezuqB7cyx7_nutYKMzdkXYR2SkrYiU"

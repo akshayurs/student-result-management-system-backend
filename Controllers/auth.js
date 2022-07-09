@@ -103,8 +103,10 @@ exports.signup = async (req, res) => {
 exports.removeUser = async (req, res) => {
   try {
     if (req.userType != 'admin') throw new Error('not authorized')
+    if (!req.body.username || req.body.username.length === 0)
+      throw new Error('Provide username')
     const user = await User.deleteOne({
-      username: req.username,
+      username: req.body.username,
     })
     if (user.deletedCount)
       res.status(200).send({

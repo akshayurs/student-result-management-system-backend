@@ -45,10 +45,6 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.pre('save', function (next) {
-  if (this.isModified('email') && !this.isGoogleUser) {
-    this.verified = false
-    this.createdDate = Date.now()
-  }
   if (!this.isModified('password')) return next()
   this.password = bcrypt.hashSync(this.password, 10)
   next()
