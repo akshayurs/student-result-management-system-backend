@@ -47,7 +47,6 @@ exports.viewResultByUSN = async (req, res) => {
     const result = await Result.findOne({
       usn,
       sem: parseInt(sem),
-      published: true,
     })
     if (!result) {
       return res

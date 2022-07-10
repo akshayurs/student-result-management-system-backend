@@ -38,7 +38,7 @@ const ResultSchema = new mongoose.Schema({
           type: String,
           required: true,
         },
-        subject: {
+        title: {
           type: String,
           required: true,
         },

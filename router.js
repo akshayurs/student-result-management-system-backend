@@ -22,7 +22,7 @@ const {
   viewMyResult,
   publishResult,
 } = require('./Controllers/result')
-const { listUsers } = require('./Controllers/other')
+const { listUsers, getDetails } = require('./Controllers/other')
 
 router.get('/', (req, res) => {
   res
@@ -48,5 +48,6 @@ router.get('/viewmyresult', isAuthorized, viewMyResult)
 router.get('/publishresult', isAuthorized, publishResult)
 
 router.get('/listusers', isAuthorized, listUsers)
+router.get('/getdetails', isAuthorized, getDetails)
 
 module.exports = router
