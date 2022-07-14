@@ -45,7 +45,7 @@ exports.viewResultByUSN = async (req, res) => {
     if (req.userType == 'student') throw new Error('not authorized')
     const { usn, sem } = req.query
     const result = await Result.findOne({
-      usn,
+      usn: new RegExp(usn, 'i'),
       sem: parseInt(sem),
     })
     if (!result) {
@@ -67,7 +67,7 @@ exports.viewMyResult = async (req, res) => {
   try {
     const { sem } = req.query
     const result = await Result.findOne({
-      usn: req.username,
+      usn: new RegExp(req.username, 'i'),
       sem: parseInt(sem),
       published: true,
     })
